@@ -1,0 +1,352 @@
+[
+  {
+    "objectID": "index.html#who-am-i",
+    "href": "index.html#who-am-i",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "👋 Who am I?",
+    "text": "👋 Who am I?"
+  },
+  {
+    "objectID": "index.html#who-are-we",
+    "href": "index.html#who-are-we",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "👋 Who are we?",
+    "text": "👋 Who are we?"
+  },
+  {
+    "objectID": "index.html#who-are-you",
+    "href": "index.html#who-are-you",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "👋 Who are you?",
+    "text": "👋 Who are you?\nYpu have a good working knowledge of R, and be familiar with basic data wrangling and visualisation as described in R for Data Science by Wickham and Grolemund (2016)."
+  },
+  {
+    "objectID": "index.html#byo-venn-diagram",
+    "href": "index.html#byo-venn-diagram",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "BYO Venn Diagram",
+    "text": "BYO Venn Diagram"
+  },
+  {
+    "objectID": "index.html#the-meta-package",
+    "href": "index.html#the-meta-package",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "The Meta-package",
+    "text": "The Meta-package\n\nlibrary(tidymodels)\n#&gt; ── Attaching packages ────────────────────────────────────── tidymodels 1.2.0 ──\n#&gt; ✔ broom        1.0.6     ✔ recipes      1.1.0\n#&gt; ✔ dials        1.3.0     ✔ rsample      1.2.1\n#&gt; ✔ dplyr        1.1.4     ✔ tibble       3.2.1\n#&gt; ✔ ggplot2      3.5.1     ✔ tidyr        1.3.1\n#&gt; ✔ infer        1.0.7     ✔ tune         1.2.1\n#&gt; ✔ modeldata    1.4.0     ✔ workflows    1.1.4\n#&gt; ✔ parsnip      1.2.1     ✔ workflowsets 1.1.0\n#&gt; ✔ purrr        1.0.2     ✔ yardstick    1.3.1\n#&gt; ── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──\n#&gt; ✖ purrr::discard() masks scales::discard()\n#&gt; ✖ dplyr::filter()  masks stats::filter()\n#&gt; ✖ dplyr::lag()     masks stats::lag()\n#&gt; ✖ recipes::step()  masks stats::step()\n#&gt; • Use suppressPackageStartupMessages() to eliminate package startup messages\n\ntidymodels_prefer()"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-consistency",
+    "href": "index.html#why-tidymodels-consistency",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Consistency",
+    "text": "Why tidymodels? Consistency\n\nHow many different ways can you think of to fit a linear model in R?\n\n\nThe blessing:\n\nMany statistical modeling practitioners implement methods in R\n\n\n\nThe curse:\n\nMany statistical modeling practitioners implement methods in R"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-consistency-1",
+    "href": "index.html#why-tidymodels-consistency-1",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Consistency",
+    "text": "Why tidymodels? Consistency\n\n\nmtcars\n#&gt;                      mpg cyl  disp  hp drat    wt  qsec vs am gear\n#&gt; Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4\n#&gt; Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4\n#&gt; Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4\n#&gt; Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3\n#&gt; Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3\n#&gt; Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3\n#&gt; Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3\n#&gt; Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4\n#&gt; Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4\n#&gt; Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4\n#&gt; Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4\n#&gt; Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3\n#&gt; Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3\n#&gt; Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3\n#&gt; Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3\n#&gt; Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3\n#&gt; Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3\n#&gt; Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4\n#&gt; Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4\n#&gt; Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4\n#&gt; Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3\n#&gt; Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3\n#&gt; AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3\n#&gt; Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3\n#&gt; Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3\n#&gt; Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4\n#&gt; Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5\n#&gt; Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5\n#&gt; Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5\n#&gt; Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5\n#&gt; Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5\n#&gt; Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4\n#&gt;                     carb\n#&gt; Mazda RX4              4\n#&gt; Mazda RX4 Wag          4\n#&gt; Datsun 710             1\n#&gt; Hornet 4 Drive         1\n#&gt; Hornet Sportabout      2\n#&gt; Valiant                1\n#&gt; Duster 360             4\n#&gt; Merc 240D              2\n#&gt; Merc 230               2\n#&gt; Merc 280               4\n#&gt; Merc 280C              4\n#&gt; Merc 450SE             3\n#&gt; Merc 450SL             3\n#&gt; Merc 450SLC            3\n#&gt; Cadillac Fleetwood     4\n#&gt; Lincoln Continental    4\n#&gt; Chrysler Imperial      4\n#&gt; Fiat 128               1\n#&gt; Honda Civic            2\n#&gt; Toyota Corolla         1\n#&gt; Toyota Corona          1\n#&gt; Dodge Challenger       2\n#&gt; AMC Javelin            2\n#&gt; Camaro Z28             4\n#&gt; Pontiac Firebird       2\n#&gt; Fiat X1-9              1\n#&gt; Porsche 914-2          2\n#&gt; Lotus Europa           2\n#&gt; Ford Pantera L         4\n#&gt; Ferrari Dino           6\n#&gt; Maserati Bora          8\n#&gt; Volvo 142E             2"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-consistency-2",
+    "href": "index.html#why-tidymodels-consistency-2",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Consistency",
+    "text": "Why tidymodels? Consistency\n\n\nWith lm():\n\nmodel &lt;- \n  lm(mpg ~ ., mtcars)\n\n\nWith tidymodels:\n\nmodel &lt;-\n  linear_reg() %&gt;%\n  set_engine(\"lm\") %&gt;%\n  fit(mpg ~ ., mtcars)"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-consistency-3",
+    "href": "index.html#why-tidymodels-consistency-3",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Consistency",
+    "text": "Why tidymodels? Consistency\n\n\nWith glmnet:\n\nmodel &lt;- \n  glmnet(\n    as.matrix(mtcars[2:11]),\n    mtcars$mpg\n  )\n\n\nWith tidymodels:\n\nmodel &lt;-\n  linear_reg() %&gt;%\n  set_engine(\"glmnet\") %&gt;%\n  fit(mpg ~ ., mtcars)"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-consistency-4",
+    "href": "index.html#why-tidymodels-consistency-4",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Consistency",
+    "text": "Why tidymodels? Consistency\n\n\nWith h2o:\n\nh2o.init()\nas.h2o(mtcars, \"cars\")\n\nmodel &lt;- \n  h2o.glm(\n    x = colnames(mtcars[2:11]), \n    y = \"mpg\",\n    \"cars\"\n  )\n\n\nWith tidymodels:\n\nmodel &lt;-\n  linear_reg() %&gt;%\n  set_engine(\"h2o\") %&gt;%\n  fit(mpg ~ ., mtcars)"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-consistency-5",
+    "href": "index.html#why-tidymodels-consistency-5",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Consistency",
+    "text": "Why tidymodels? Consistency"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-safety1",
+    "href": "index.html#why-tidymodels-safety1",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Safety1",
+    "text": "Why tidymodels? Safety1\n10.1097/01.psy.0000127692.23278.a9, 10.1016/j.patter.2023.100804, 10.1609/aaai.v32i1.11694"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-safety2",
+    "href": "index.html#why-tidymodels-safety2",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Safety1",
+    "text": "Why tidymodels? Safety1\n\nOverfitting leads to analysts believing models are more performant than they actually are.\n\n\n\nA 2023 review found data leakage to be “a widespread failure mode in machine-learning (ML)-based science.”\n\n\n\n\nImplementations of the same machine learning model give differing results, resulting in irreproducibility of modeling results.\n\n\n10.1097/01.psy.0000127692.23278.a9, 10.1016/j.patter.2023.100804, 10.1609/aaai.v32i1.11694"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-safety",
+    "href": "index.html#why-tidymodels-safety",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Safety",
+    "text": "Why tidymodels? Safety\n\nSome of the resistance I’ve seen to tidymodels comes from a place of “This makes it too easy- you’re not thinking carefully about what the code is doing!” But I think this is getting it backwards.\n\n\nBy removing the burden of writing procedural logic, I get to focus on scientific and statistical questions about my data and model.\n\nDavid Robinson"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-extensibility",
+    "href": "index.html#why-tidymodels-extensibility",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Extensibility",
+    "text": "Why tidymodels? Extensibility\n\nCan’t find the technique you need?"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-extensibility-1",
+    "href": "index.html#why-tidymodels-extensibility-1",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Extensibility",
+    "text": "Why tidymodels? Extensibility"
+  },
+  {
+    "objectID": "index.html#why-tidymodels-deployability",
+    "href": "index.html#why-tidymodels-deployability",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Why tidymodels? Deployability",
+    "text": "Why tidymodels? Deployability\n\nTightly integrated with Posit Workbench and Connect\n\n\n\nWorkbench: scalable, on-demand computational resources\nConnect: share work with collaborators and practitioners\n\n\n\nThe vetiver package makes it extremely easy to publish your model."
+  },
+  {
+    "objectID": "index.html#food-deliveries",
+    "href": "index.html#food-deliveries",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Food deliveries",
+    "text": "Food deliveries\nThese data are in the modeldata package.\n\nglimpse(deliveries)\n#&gt; Rows: 10,012\n#&gt; Columns: 31\n#&gt; $ time_to_delivery &lt;dbl&gt; 16.1106, 22.9466, 30.2882, 33.4266, 27.2255…\n#&gt; $ hour             &lt;dbl&gt; 11.899, 19.230, 18.374, 15.836, 19.619, 12.…\n#&gt; $ day              &lt;fct&gt; Thu, Tue, Fri, Thu, Fri, Sat, Sun, Thu, Fri…\n#&gt; $ distance         &lt;dbl&gt; 3.15, 3.69, 2.06, 5.97, 2.52, 3.35, 2.46, 2…\n#&gt; $ item_01          &lt;int&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0…\n#&gt; $ item_02          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0…\n#&gt; $ item_03          &lt;int&gt; 2, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1…\n#&gt; $ item_04          &lt;int&gt; 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0…\n#&gt; $ item_05          &lt;int&gt; 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_06          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_07          &lt;int&gt; 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_08          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0…\n#&gt; $ item_09          &lt;int&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1…\n#&gt; $ item_10          &lt;int&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0…\n#&gt; $ item_11          &lt;int&gt; 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_12          &lt;int&gt; 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0…\n#&gt; $ item_13          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_14          &lt;int&gt; 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_15          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_16          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_17          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0…\n#&gt; $ item_18          &lt;int&gt; 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0…\n#&gt; $ item_19          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_20          &lt;int&gt; 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_21          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_22          &lt;int&gt; 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0…\n#&gt; $ item_23          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_24          &lt;int&gt; 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n#&gt; $ item_25          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0…\n#&gt; $ item_26          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0…\n#&gt; $ item_27          &lt;int&gt; 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0…"
+  },
+  {
+    "objectID": "index.html#investigate-the-data",
+    "href": "index.html#investigate-the-data",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Investigate the data!",
+    "text": "Investigate the data!\nLet’s take 10m and have you explore the data.\nLet me know what you think about them. (not a trick question)\n −+ 10:00"
+  },
+  {
+    "objectID": "index.html#splitting-the-data",
+    "href": "index.html#splitting-the-data",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Splitting the data",
+    "text": "Splitting the data\nWe typically start by splitting the data into partitions used for modeling and assessment:\n\nset.seed(991)\ndelivery_split &lt;- initial_split(deliveries, prop = 0.75, strata = time_to_delivery)\n\n\ndelivery_train &lt;- training(delivery_split)\ndelivery_test  &lt;- testing(delivery_split)\n\n\n\n(TMwR) (aml4td)"
+  },
+  {
+    "objectID": "index.html#splitting-the-data-with-validation",
+    "href": "index.html#splitting-the-data-with-validation",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Splitting the data (with validation)",
+    "text": "Splitting the data (with validation)\nInstead, let’s do a 3-way split to include a validation set that we can use before the test set:\n\nset.seed(991)\ndelivery_split &lt;- initial_validation_split(deliveries, prop = c(0.8, 0.1), \n                                           strata = time_to_delivery)\n\ndelivery_train &lt;- training(delivery_split)\ndelivery_test  &lt;- testing(delivery_split)\ndelivery_val   &lt;- validation(delivery_split)\n\n\n\n(TMwR)"
+  },
+  {
+    "objectID": "index.html#a-linear-model",
+    "href": "index.html#a-linear-model",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "A linear model",
+    "text": "A linear model\n\nmod_spec &lt;- linear_reg()\nmod_fit &lt;- mod_spec %&gt;% fit(time_to_delivery ~ ., data = delivery_train)\n\ntidy(mod_fit)\n#&gt; # A tibble: 36 × 5\n#&gt;    term        estimate std.error statistic   p.value\n#&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n#&gt;  1 (Intercept)   -18.4     0.372     -49.4  0        \n#&gt;  2 hour            1.78    0.0169    105.   0        \n#&gt;  3 dayTue          1.02    0.254       4.02 5.77e-  5\n#&gt;  4 dayWed          3.46    0.230      15.1  9.52e- 51\n#&gt;  5 dayThu          5.04    0.225      22.4  9.71e-108\n#&gt;  6 dayFri          6.98    0.220      31.7  1.49e-207\n#&gt;  7 daySat          7.82    0.219      35.7  2.81e-259\n#&gt;  8 daySun          3.53    0.229      15.4  5.15e- 53\n#&gt;  9 distance        2.78    0.0414     67.0  0        \n#&gt; 10 item_01         1.61    0.140      11.5  2.13e- 30\n#&gt; # ℹ 26 more rows"
+  },
+  {
+    "objectID": "index.html#a-linear-model-1",
+    "href": "index.html#a-linear-model-1",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "A linear model",
+    "text": "A linear model\n\n# Good: \npredict(mod_fit, head(delivery_val, 3))\n#&gt; # A tibble: 3 × 1\n#&gt;   .pred\n#&gt;   &lt;dbl&gt;\n#&gt; 1  12.4\n#&gt; 2  27.2\n#&gt; 3  20.2\n\n# Better:\naugment(mod_fit, head(delivery_val, 3)) %&gt;% select(1:9)\n#&gt; # A tibble: 3 × 9\n#&gt;   .pred .resid time_to_delivery  hour day   distance item_01 item_02\n#&gt;   &lt;dbl&gt;  &lt;dbl&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;\n#&gt; 1  12.4   5.62             18.0  12.1 Tue       2.4        0       0\n#&gt; 2  27.2   4.31             31.5  16.5 Sat       2.57       0       0\n#&gt; 3  20.2  -2.42             17.8  13.2 Fri       2.74       0       0\n#&gt; # ℹ 1 more variable: item_03 &lt;int&gt;"
+  },
+  {
+    "objectID": "index.html#does-it-work",
+    "href": "index.html#does-it-work",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Does it work?",
+    "text": "Does it work?\n\n\n\naugment(mod_fit, delivery_val) %&gt;% \n  ggplot(aes(.pred, time_to_delivery)) + \n  geom_abline(col = \"green\", lty = 2) +\n  geom_point(alpha = 1 / 3) +\n  geom_smooth(se = FALSE) +\n  coord_obs_pred()\n\nMeh.\nHow will we quantify “meh”?"
+  },
+  {
+    "objectID": "index.html#measuring-performance",
+    "href": "index.html#measuring-performance",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Measuring performance",
+    "text": "Measuring performance\nThere are many metrics that we can use. Let’s go with RMSE and R2:\n\nreg_metrics &lt;- metric_set(rmse, rsq)\n\naugment(mod_fit, delivery_val) %&gt;% \n  reg_metrics(time_to_delivery, .pred)\n#&gt; # A tibble: 2 × 3\n#&gt;   .metric .estimator .estimate\n#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n#&gt; 1 rmse    standard       3.76 \n#&gt; 2 rsq     standard       0.704\n\n\n(TMwR)"
+  },
+  {
+    "objectID": "index.html#feature-engineering",
+    "href": "index.html#feature-engineering",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Feature engineering",
+    "text": "Feature engineering\nThere’s a lot more we can do with this model.\nWe need better representations of our predictors.\n\nWe need recipes! 🧁\nRecipes are sequential operations for feature engineering.\n\n(TMwR)"
+  },
+  {
+    "objectID": "index.html#initializing-the-recipe",
+    "href": "index.html#initializing-the-recipe",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Initializing the recipe",
+    "text": "Initializing the recipe\n\nfood_rec &lt;- recipe(time_to_delivery ~ ., data = delivery_train)\nfood_rec\n\nThis first call just catalogs the data.\n\nsummary(food_rec)\n#&gt; # A tibble: 31 × 4\n#&gt;    variable type      role      source  \n#&gt;    &lt;chr&gt;    &lt;list&gt;    &lt;chr&gt;     &lt;chr&gt;   \n#&gt;  1 hour     &lt;chr [2]&gt; predictor original\n#&gt;  2 day      &lt;chr [3]&gt; predictor original\n#&gt;  3 distance &lt;chr [2]&gt; predictor original\n#&gt;  4 item_01  &lt;chr [2]&gt; predictor original\n#&gt;  5 item_02  &lt;chr [2]&gt; predictor original\n#&gt;  6 item_03  &lt;chr [2]&gt; predictor original\n#&gt;  7 item_04  &lt;chr [2]&gt; predictor original\n#&gt;  8 item_05  &lt;chr [2]&gt; predictor original\n#&gt;  9 item_06  &lt;chr [2]&gt; predictor original\n#&gt; 10 item_07  &lt;chr [2]&gt; predictor original\n#&gt; # ℹ 21 more rows"
+  },
+  {
+    "objectID": "index.html#converting-to-indicator-variables",
+    "href": "index.html#converting-to-indicator-variables",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Converting to indicator variables",
+    "text": "Converting to indicator variables\n\nfood_rec &lt;- recipe(time_to_delivery ~ ., data = delivery_train) %&gt;% \n  step_dummy(all_factor_predictors())\n\n\nFor any factor predictors, make binary indicators.\nThere are a lot of recipe steps that can convert categorical predictors to numeric columns (TMwR).\nThe new columns for day will have default names of day_Tue - day_Sun.\n\nThere are many types of recipe selectors."
+  },
+  {
+    "objectID": "index.html#splines-are-the-best",
+    "href": "index.html#splines-are-the-best",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Splines are the best",
+    "text": "Splines are the best\nSplines are tools that enable linear models to model nonlinear data.\nWe choose the type of spline function and how many features to use.\n\nMore features, more flexibility\nMore features, more risk of overfitting\n\nWe’ll focus on natural splines.\n \n(TMwR)"
+  },
+  {
+    "objectID": "index.html#section-2",
+    "href": "index.html#section-2",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "",
+    "text": "#| label: fig-natural-spline\n#| viewerHeight: 600\n#| viewerWidth: \"100%\"\n#| standalone: true\n\n\nlibrary(shiny)\nlibrary(patchwork)\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(ggplot2)\nlibrary(splines2)\nlibrary(bslib)\nlibrary(viridis)\nlibrary(modeldata)\n\ndata(ames)\names$Sale_Price &lt;- log10(ames$Sale_Price)\n\nui &lt;- page_fillable(\n  theme = bs_theme(bg = \"#fcfefe\", fg = \"#595959\"),\n  padding = \"1rem\",\n  layout_columns(\n    fill = FALSE,\n    col_widths = breakpoints(sm = c(-3, 6, -3)),\n    sliderInput(\n      \"spline_df\",\n      label = \"# Spline Terms\",\n      min = 3L, max = 30L, step = 2L, value = 3L\n    ), # sliderInput\n  ), # layout_columns\n  layout_columns(\n    fill = FALSE,\n    col_widths = breakpoints(sm = c(-1, 10, -1)),\n    as_fill_carrier(plotOutput('spline'))\n  )         \n)\n\nserver &lt;- function(input, output, session) {\n  \n  light_bg &lt;- \"#fcfefe\" # from aml4td.scss\n  grid_theme &lt;- bs_theme(\n    bg = \"#fcfefe\", fg = \"#595959\"\n  )\n  \n  # ------------------------------------------------------------------------------\n  \n  theme_light_bl&lt;- function(...) {\n    \n    ret &lt;- ggplot2::theme_bw(...)\n    \n    col_rect &lt;- ggplot2::element_rect(fill = light_bg, colour = light_bg)\n    ret$panel.background  &lt;- col_rect\n    ret$plot.background   &lt;- col_rect\n    ret$legend.background &lt;- col_rect\n    ret$legend.key        &lt;- col_rect\n    \n    larger_x_text &lt;- ggplot2::element_text(size = rel(1.25))\n    larger_y_text &lt;- ggplot2::element_text(size = rel(1.25), angle = 90)\n    ret$axis.text.x &lt;- larger_x_text\n    ret$axis.text.y &lt;- larger_y_text\n    ret$axis.title.x &lt;- larger_x_text\n    ret$axis.title.y &lt;- larger_y_text  \n    \n    ret$legend.position &lt;- \"top\"\n    \n    ret\n  }\n  \n  col_rect &lt;- ggplot2::element_rect(fill = light_bg, colour = light_bg)\n  \n  maybe_lm &lt;- function(x) {\n    try(lm(y ~ poly(x, input$piecewise_deg), data = x), silent = TRUE)\n  }\n  \n  expansion_to_tibble &lt;- function(x, original, prefix = \"term \") {\n    cls &lt;- class(x)[1]\n    nms &lt;- recipes::names0(ncol(x), prefix)\n    colnames(x) &lt;- nms\n    x &lt;- as_tibble(x)\n    x$variable &lt;- original\n    res &lt;- tidyr::pivot_longer(x, cols = c(-variable))\n    if (cls != \"poly\") {\n      res &lt;- res[res$value &gt; .Machine$double.eps,]\n    }\n    res\n  } \n  \n  mult_poly &lt;- function(dat, degree = 4) {\n    rng &lt;- extendrange(dat$x, f = .025)\n    grid &lt;- seq(rng[1], rng[2], length.out = 1000)\n    grid_df &lt;- tibble(x = grid)\n    feat &lt;- poly(grid_df$x, degree)\n    res &lt;- expansion_to_tibble(feat, grid_df$x)\n    \n    # make some random names so that we can plot the features with distinct colors\n    rand_names &lt;- lapply(1:degree, function(x) paste0(sample(letters)[1:10], collapse = \"\"))\n    rand_names&lt;- unlist(rand_names)\n    rand_names &lt;- tibble(name = unique(res$name), name2 = rand_names)\n    res &lt;- \n      dplyr::inner_join(res, rand_names, by = dplyr::join_by(name)) %&gt;% \n      dplyr::select(-name) %&gt;% \n      dplyr::rename(name = name2)\n    res\n  }\n  \n  # ------------------------------------------------------------------------------\n  \n  spline_example &lt;- tibble(y = ames$Sale_Price, x = ames$Latitude)\n  rng &lt;- extendrange(ames$Latitude, f = .025)\n  grid &lt;- seq(rng[1], rng[2], length.out = 1000)\n  grid_df &lt;- tibble(x = grid)\n  alphas &lt;- 1 / 4\n  line_wd &lt;- 1.0\n  \n  base_p &lt;-\n    spline_example %&gt;%\n    ggplot(aes(x = x, y = y)) +\n    geom_point(alpha = 3 / 4, pch = 1, cex = 3) +\n    labs(x = \"Predictor\", y = \"Outcome\") +\n    theme_light_bl()\n  \n  output$spline &lt;- renderPlot({\n    \n    spline_fit &lt;- lm(y ~ naturalSpline(x, df = input$spline_df), data = spline_example)\n    spline_pred &lt;- \n      predict(spline_fit, grid_df, interval = \"confidence\", level = .90) %&gt;% \n      bind_cols(grid_df)\n    \n    spline_p &lt;- base_p +\n      geom_ribbon(\n        data = spline_pred,\n        aes(y = NULL, ymin = lwr, ymax = upr),\n        alpha = 1 / 15) +\n      geom_line(\n        data = spline_pred,\n        aes(y = fit),\n        col = \"red\",\n        linewidth = line_wd)\n    \n    feature_p &lt;-\n      naturalSpline(grid_df$x, df = input$spline_df) %&gt;% \n      expansion_to_tibble(grid_df$x) %&gt;% \n      ggplot(aes(variable, y = value, group = name, col = name)) +\n      geom_line(show.legend = FALSE) + # , linewidth = 1, alpha = 1 / 2\n      theme_void() +\n      theme(\n        plot.margin = margin(t = 0, r = 0, b = -20, l = 0),\n        panel.background = col_rect,\n        plot.background = col_rect,\n        legend.background = col_rect,\n        legend.key = col_rect\n      ) +\n      scale_color_viridis(discrete = TRUE, option = \"turbo\")\n    \n    p &lt;- (feature_p / spline_p) + plot_layout(heights = c(1, 4))\n    \n    print(p)\n    \n  })\n  \n}\n\napp &lt;- shinyApp(ui = ui, server = server)"
+  },
+  {
+    "objectID": "index.html#adding-splines",
+    "href": "index.html#adding-splines",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Adding splines!",
+    "text": "Adding splines!\n\nfood_rec &lt;- recipe(time_to_delivery ~ ., data = delivery_train) %&gt;% \n  step_dummy(all_factor_predictors()) %&gt;% \n  step_spline_natural(hour, distance, deg_free = 5)\n\n\nWe’ll choose five terms for the two predictors (but we could optimize these).\nThe new column naming convention is: hour_1 - hour_5."
+  },
+  {
+    "objectID": "index.html#adding-interactions",
+    "href": "index.html#adding-interactions",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Adding interactions",
+    "text": "Adding interactions\n\nfood_rec &lt;- recipe(time_to_delivery ~ ., data = delivery_train) %&gt;% \n  step_dummy(all_factor_predictors()) %&gt;% \n  step_spline_natural(hour, distance, deg_free = 5) %&gt;% \n  step_interact(~ starts_with(\"hour_\"):starts_with(\"day_\"))\n\n\nThese new columns are named (by default) to be hour_1_x_day_Tue through hour_5_x_day_Sun.\n\nQuestion: In a new step, how would you select the interactions?\n\nList of known recipe steps."
+  },
+  {
+    "objectID": "index.html#combining-a-model-and-a-recipe",
+    "href": "index.html#combining-a-model-and-a-recipe",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Combining a model and a recipe",
+    "text": "Combining a model and a recipe\nWe can make a new type of object called a pipeline workflow that can be used as one unit.\n\nlm_wflow &lt;- \n  workflow() %&gt;% \n  add_model(linear_reg()) %&gt;% \n  add_recipe(food_rec)\n\n\n\n\n(TMwR)"
+  },
+  {
+    "objectID": "index.html#combining-a-model-and-a-recipe-1",
+    "href": "index.html#combining-a-model-and-a-recipe-1",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Combining a model and a recipe",
+    "text": "Combining a model and a recipe\n\nlm_wflow\n#&gt; ══ Workflow ══════════════════════════════════════════════════════════\n#&gt; Preprocessor: Recipe\n#&gt; Model: linear_reg()\n#&gt; \n#&gt; ── Preprocessor ──────────────────────────────────────────────────────\n#&gt; 3 Recipe Steps\n#&gt; \n#&gt; • step_dummy()\n#&gt; • step_spline_natural()\n#&gt; • step_interact()\n#&gt; \n#&gt; ── Model ─────────────────────────────────────────────────────────────\n#&gt; Linear Regression Model Specification (regression)\n#&gt; \n#&gt; Computational engine: lm"
+  },
+  {
+    "objectID": "index.html#combining-a-model-and-a-recipe-2",
+    "href": "index.html#combining-a-model-and-a-recipe-2",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Combining a model and a recipe",
+    "text": "Combining a model and a recipe\n\nlm_fit &lt;- fit(lm_wflow, data = delivery_train)\n\ntidy(lm_fit) %&gt;% arrange(term)\n#&gt; # A tibble: 74 × 5\n#&gt;    term        estimate std.error statistic  p.value\n#&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n#&gt;  1 (Intercept)   12.5       0.834    14.9   8.35e-50\n#&gt;  2 day_Fri       -4.62      0.867    -5.33  9.89e- 8\n#&gt;  3 day_Sat       -4.59      0.857    -5.35  9.02e- 8\n#&gt;  4 day_Sun       -3.12      0.904    -3.45  5.62e- 4\n#&gt;  5 day_Thu       -3.54      0.912    -3.88  1.05e- 4\n#&gt;  6 day_Tue       -0.509     1.01     -0.505 6.13e- 1\n#&gt;  7 day_Wed       -2.83      0.895    -3.17  1.54e- 3\n#&gt;  8 distance_1     1.39      0.460     3.03  2.46e- 3\n#&gt;  9 distance_2     1.53      0.220     6.94  4.36e-12\n#&gt; 10 distance_3     2.67      0.259    10.3   9.43e-25\n#&gt; # ℹ 64 more rows"
+  },
+  {
+    "objectID": "index.html#a-better-path-to-metrics",
+    "href": "index.html#a-better-path-to-metrics",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "A better path to metrics",
+    "text": "A better path to metrics\n\nval_rs &lt;- validation_set(delivery_split)\nval_rs\n#&gt; # A tibble: 1 × 2\n#&gt;   splits              id        \n#&gt;   &lt;list&gt;              &lt;chr&gt;     \n#&gt; 1 &lt;split [8008/1000]&gt; validation\n\nlm_res &lt;- \n  lm_wflow %&gt;% \n  fit_resamples(val_rs, control = control_resamples(save_pred = TRUE))\n\nlm_res\n#&gt; # Resampling results\n#&gt; # Validation Set (0.89/0.11) \n#&gt; # A tibble: 1 × 5\n#&gt;   splits              id         .metrics .notes   .predictions\n#&gt;   &lt;list&gt;              &lt;chr&gt;      &lt;list&gt;   &lt;list&gt;   &lt;list&gt;      \n#&gt; 1 &lt;split [8008/1000]&gt; validation &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;\n\n(TMwR)"
+  },
+  {
+    "objectID": "index.html#performance",
+    "href": "index.html#performance",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Performance",
+    "text": "Performance\n\ncollect_metrics(lm_res)\n#&gt; # A tibble: 2 × 6\n#&gt;   .metric .estimator  mean     n std_err .config             \n#&gt;   &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               \n#&gt; 1 rmse    standard   2.39      1      NA Preprocessor1_Model1\n#&gt; 2 rsq     standard   0.881     1      NA Preprocessor1_Model1"
+  },
+  {
+    "objectID": "index.html#does-it-work-better",
+    "href": "index.html#does-it-work-better",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Does it work better?",
+    "text": "Does it work better?\n\n\n\nlm_res %&gt;% \n  collect_predictions() %&gt;% \n  ggplot(aes(.pred, time_to_delivery)) + \n  geom_abline(col = \"green\", lty = 2) +\n  geom_point(alpha = 1 / 3) +\n  geom_smooth(se = FALSE) +\n  coord_obs_pred()\n\nNot perfect but 👍.\n\nThe probably package has better tools to visualize and mitigate calibration issues."
+  },
+  {
+    "objectID": "index.html#next-steps",
+    "href": "index.html#next-steps",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Next Steps",
+    "text": "Next Steps\nWe would\n\ndo some exploratory data analyses to figure out better features.\ntune the model (e.g., optimize the number of spline terms) (TMwR)\ntry a different estimation method (Bayesian, robust, etc.)\n\nHowever…"
+  },
+  {
+    "objectID": "index.html#rule-based-ensembles",
+    "href": "index.html#rule-based-ensembles",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Rule-based ensembles",
+    "text": "Rule-based ensembles\nCubist is a rule-based ensemble.\nIt first creates a regression tree and converts it into a rule\n\nA path to a terminal node\n\nFor each rule, it creates a corresponding linear model.\nIt makes many of these rule sets."
+  },
+  {
+    "objectID": "index.html#a-regression-tree",
+    "href": "index.html#a-regression-tree",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "A regression tree",
+    "text": "A regression tree"
+  },
+  {
+    "objectID": "index.html#two-example-rules",
+    "href": "index.html#two-example-rules",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Two example rules",
+    "text": "Two example rules\nif\n   hour &lt;= 14.252\n   day in {Fri, Sat}\nthen\n   outcome = -23.039 + 2.85 hour + 1.25 distance + 0.4 item_24\n             + 0.4 item_08 + 0.6 item_01 + 0.6 item_10 + 0.5 item_21\n\nif\n   hour &gt; 15.828\n   distance &lt;= 4.35\n   item_10 &gt; 0\n   day = Thu\nthen\n   outcome = 11.29956 + 4.24 distance + 14.3 item_01 + 4.3 item_10\n             + 2.1 item_02 + 0.03 hour"
+  },
+  {
+    "objectID": "index.html#fitting-a-cubist-model",
+    "href": "index.html#fitting-a-cubist-model",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Fitting a Cubist model",
+    "text": "Fitting a Cubist model\n\nlibrary(rules)\n\ncubist_res &lt;- \n  cubist_rules() %&gt;% \n  fit_resamples(\n    time_to_delivery ~ ., \n    resamples = val_rs, \n    control = control_resamples(save_pred = TRUE))\n\ncollect_metrics(cubist_res)\n#&gt; # A tibble: 2 × 6\n#&gt;   .metric .estimator  mean     n std_err .config             \n#&gt;   &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               \n#&gt; 1 rmse    standard   2.18      1      NA Preprocessor1_Model1\n#&gt; 2 rsq     standard   0.901     1      NA Preprocessor1_Model1"
+  },
+  {
+    "objectID": "index.html#does-it-work-better-1",
+    "href": "index.html#does-it-work-better-1",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Does it work better?",
+    "text": "Does it work better?\n\n\n\ncubist_res %&gt;% \n  collect_predictions() %&gt;% \n  ggplot(aes(.pred, time_to_delivery)) + \n  geom_abline(col = \"green\", lty = 2) +\n  geom_point(alpha = 1 / 3) +\n  geom_smooth(se = FALSE) +\n  coord_obs_pred()\n\nNice"
+  },
+  {
+    "objectID": "index.html#a-shortcut",
+    "href": "index.html#a-shortcut",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "A shortcut",
+    "text": "A shortcut\n\ncubist_wflow &lt;- workflow(time_to_delivery ~ ., cubist_rules())\n\ncubist_final_res &lt;- cubist_wflow %&gt;% last_fit(delivery_split)\n\ncubist_final_res\n#&gt; # Resampling results\n#&gt; # Manual resampling \n#&gt; # A tibble: 1 × 6\n#&gt;   splits              id     .metrics .notes   .predictions .workflow \n#&gt;   &lt;list&gt;              &lt;chr&gt;  &lt;list&gt;   &lt;list&gt;   &lt;list&gt;       &lt;list&gt;    \n#&gt; 1 &lt;split [8008/1004]&gt; train… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;     &lt;workflow&gt;"
+  },
+  {
+    "objectID": "index.html#test-set-results",
+    "href": "index.html#test-set-results",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Test set results",
+    "text": "Test set results\n\n\n\ncollect_metrics(cubist_final_res)\n#&gt; # A tibble: 2 × 4\n#&gt;   .metric .estimator .estimate .config             \n#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               \n#&gt; 1 rmse    standard       2.08  Preprocessor1_Model1\n#&gt; 2 rsq     standard       0.914 Preprocessor1_Model1\n\nNot too bad.\n\ncubist_final_res %&gt;% \n  collect_predictions() %&gt;% \n  ggplot(aes(.pred, time_to_delivery)) + \n  geom_abline(col = \"green\", lty = 2) +\n  geom_point(alpha = 1 / 3) +\n  geom_smooth(se = FALSE) +\n  coord_obs_pred()\n\nHmm. Could be better."
+  },
+  {
+    "objectID": "index.html#resources-1",
+    "href": "index.html#resources-1",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Resources",
+    "text": "Resources\n\n\n\ntidyverse: r4ds.hadley.nz"
+  },
+  {
+    "objectID": "index.html#resources-2",
+    "href": "index.html#resources-2",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Resources",
+    "text": "Resources\n\n\n\ntidyverse: r4ds.hadley.nz\ntidymodels: tmwr.org"
+  },
+  {
+    "objectID": "index.html#resources-3",
+    "href": "index.html#resources-3",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Resources",
+    "text": "Resources\n\ntidyverse: r4ds.hadley.nz\ntidymodels: tmwr.org\nwebpage: tidymodels.org\nhomepage: workshops.tidymodels.org\naml4td: tidymodels.aml4td.org"
+  },
+  {
+    "objectID": "index.html#thanks",
+    "href": "index.html#thanks",
+    "title": "Introduction to Machine Learning with tidymodels",
+    "section": "Thanks",
+    "text": "Thanks\nThanks for the invitation to speak today!\n\nThe tidymodels team: Hannah Frick, Emil Hvitfeldt, and Simon Couch.\n\nSpecial thanks to the other folks who contributed so much to tidymodels: Davis Vaughan, Julia Silge, Edgar Ruiz, Alison Hill, Desirée De Leon, our previous interns, and the tidyverse team.\n\n\n\nhttps://topepo.github.io/2024_FDA_Mod_and_Sim"
+  }
+]

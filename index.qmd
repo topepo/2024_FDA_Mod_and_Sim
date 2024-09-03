@@ -1,0 +1,1235 @@
+---
+title: "Introduction to Machine Learning with tidymodels"
+author: "Max Kuhn and Simon Couch"
+title-slide-attributes:
+  data-background-image: figures/hex_wall.png
+  data-background-size: contain
+  data-background-opacity: "0.15"
+format: 
+  revealjs:
+    include-before-body: header.html
+    include-after-body: footer-annotations.html    
+editor: source
+knitr:
+  opts_chunk: 
+    echo: true
+    collapse: true
+    comment: "#>"
+---
+
+## `r emo::ji("wave")` Who am I?
+
+<!-- who am i? -->
+
+::: columns
+::: {.column width="25%"}
+:::
+
+::: columns
+::: {.column width="25%"}
+![](figures/avatars/max.png) ![](figures/avatars/empty.png)
+:::
+
+::: {.column width="25%"}
+![](figures/avatars/empty.png) ![](figures/avatars/empty.png)
+:::
+:::
+
+::: {.column width="25%"}
+:::
+:::
+
+------------------------------------------------------------------------
+
+## `r emo::ji("wave")` Who are we?
+
+<!-- who are we? -->
+
+::: columns
+::: {.column width="25%"}
+:::
+
+::: columns
+::: {.column width="25%"}
+![](figures/avatars/max.png) ![](figures/avatars/emil.png)
+:::
+
+::: {.column width="25%"}
+![](figures/avatars/hannah.png) ![](figures/avatars/simon.png)
+:::
+:::
+
+::: {.column width="25%"}
+:::
+:::
+
+------------------------------------------------------------------------
+
+## `r emo::ji("wave")` Who are you?
+
+
+Ypu have a good working knowledge of R, and be familiar with basic data wrangling and visualisation as described in [R for Data Science by Wickham and Grolemund (2016)](https://r4ds.hadley.nz/).
+
+# {background-color="#CA225E"}
+
+<center>sources: https://github.com/topepo/2024_FDA_Mod_and_Sim</center>
+
+<br>
+
+<center>slides: https://topepo.github.io/2024_FDA_Mod_and_Sim</center>
+
+
+# What is tidymodels? {background-color="#CA225E"}
+
+------------------------------------------------------------------------
+
+<br>
+
+> *The tidymodels framework is a collection of packages for modeling and machine learning using tidyverse principles.*
+>
+> <p style="text-align:right;">
+>
+> \- tidymodels.org
+>
+> </p>
+
+. . .
+
+<br>
+
+...so what is modeling and machine learning?
+
+## BYO Venn Diagram
+
+![](figures/byo_venn_diagram.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+<br><br>
+
+> *The tidymodels framework is a collection of packages for safe, performant, and expressive supervised predictive modeling on tabular data.*
+
+. . .
+
+<br>
+
+`r emo::ji("woozy_face")`
+
+------------------------------------------------------------------------
+
+<br><br>
+
+> *The tidymodels framework is a collection of packages for safe, performant, and expressive [supervised predictive modeling]{style="color:#CA225E"} on tabular data.*
+
+<br>
+
+`r emo::ji("woozy_face")`
+
+------------------------------------------------------------------------
+
+<br><br>
+
+> *The tidymodels framework is a collection of packages for safe, performant, and expressive supervised predictive modeling on [tabular data]{style="color:#CA225E"}.*
+
+<br>
+
+`r emo::ji("woozy_face")`
+
+------------------------------------------------------------------------
+
+<br><br>
+
+> *The tidymodels framework is a collection of packages for [safe, performant, and expressive]{style="color:#CA225E"} supervised predictive modeling on tabular data.*
+
+<br>
+
+`r emo::ji("woozy_face")`
+
+------------------------------------------------------------------------
+
+<br><br>
+
+> *The tidymodels framework is a collection of packages for safe, performant, and expressive supervised predictive modeling on tabular data.*
+
+<br>
+
+`r emo::ji("woozy_face")`
+
+. . .
+
+<br>
+
+Think about the modeling problem, not the syntax.
+
+##
+
+![](https://vetiver.rstudio.com/images/ml_ops_cycle.png){fig-align="center"}
+
+## The Meta-package
+
+
+```{r}
+#| message: true
+library(tidymodels)
+
+tidymodels_prefer()
+```
+
+```{r}
+#| label: setup-2
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(textrecipes)
+library(themis)
+x <- lapply(parsnip:::extensions(), require, character.only = TRUE)
+
+library(bundle)
+library(vetiver)
+library(pins)
+
+library(countdown)
+
+options(width = 70)
+
+tidymodels_prefer()
+theme_set(theme_bw())
+options(pillar.advice = FALSE, pillar.min_title_chars = Inf)
+```
+
+# Why tidymodels? {background-color="#CA225E"}
+
+## Why tidymodels?  *Consistency*
+
+. . .
+
+How many different ways can you think of to fit a linear model in R?
+
+. . .
+
+The blessing:
+
+-   Many statistical modeling practitioners implement methods in R
+
+. . .
+
+The curse:
+
+-   Many statistical modeling practitioners implement methods in R
+
+## Why tidymodels?  *Consistency*
+
+. . .
+
+```{r}
+mtcars
+```
+
+## Why tidymodels?  *Consistency*
+
+::: columns
+::: {.column width="50%"}
+With `lm()`:
+
+```{r eng-lm-model}
+#| echo: true
+#| eval: false
+model <- 
+  lm(mpg ~ ., mtcars)
+```
+:::
+
+::: {.column width="50%"}
+With tidymodels:
+
+```{r tm-lm}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|3"
+model <-
+  linear_reg() %>%
+  set_engine("lm") %>%
+  fit(mpg ~ ., mtcars)
+```
+:::
+:::
+
+## Why tidymodels?  *Consistency*
+
+::: columns
+::: {.column width="50%"}
+With glmnet:
+
+```{r eng-glmnet-model}
+#| echo: true
+#| eval: false
+model <- 
+  glmnet(
+    as.matrix(mtcars[2:11]),
+    mtcars$mpg
+  )
+```
+:::
+
+::: {.column width="50%"}
+With tidymodels:
+
+```{r tm-glmnet}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "3||3"
+model <-
+  linear_reg() %>%
+  set_engine("glmnet") %>%
+  fit(mpg ~ ., mtcars)
+```
+:::
+:::
+
+## Why tidymodels?  *Consistency*
+
+::: columns
+::: {.column width="50%"}
+With h2o:
+
+```{r eng-h2o-model}
+#| echo: true
+#| eval: false
+h2o.init()
+as.h2o(mtcars, "cars")
+
+model <- 
+  h2o.glm(
+    x = colnames(mtcars[2:11]), 
+    y = "mpg",
+    "cars"
+  )
+```
+:::
+
+::: {.column width="50%"}
+With tidymodels:
+
+```{r tm-h2o}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "3|"
+model <-
+  linear_reg() %>%
+  set_engine("h2o") %>%
+  fit(mpg ~ ., mtcars)
+```
+:::
+:::
+
+## Why tidymodels?  *Consistency*
+
+## Why tidymodels?  *Safety*[^1]
+
+[^1]: 10.1097/01.psy.0000127692.23278.a9, 10.1016/j.patter.2023.100804, 10.1609/aaai.v32i1.11694
+
+## Why tidymodels?  *Safety*[^2]
+
+[^2]: 10.1097/01.psy.0000127692.23278.a9, 10.1016/j.patter.2023.100804, 10.1609/aaai.v32i1.11694
+
+-   **Overfitting** leads to analysts believing models are more performant than they actually are.
+
+. . .
+
+-   A 2023 review found **data leakage** to be "a widespread failure mode in machine-learning (ML)-based science."
+
+. . .
+
+-   Implementations of the same machine learning model give differing results, resulting in **irreproducibility** of modeling results.
+
+------------------------------------------------------------------------
+
+## Why tidymodels?  *Safety*
+
+> Some of the resistance I’ve seen to tidymodels comes from a place of “This makes it too easy- you’re not thinking carefully about what the code is doing!” But I think this is getting it backwards. 
+
+> By removing the burden of writing procedural logic, **I get to focus on scientific and statistical questions** about my data and model.
+
+[David Robinson](http://varianceexplained.org/r/sliced-ml/){target="_blank"}
+
+------------------------------------------------------------------------
+
+### Why tidymodels?  *Completeness*
+
+![](figures/whole-game-final.jpeg)
+
+------------------------------------------------------------------------
+
+### Why tidymodels?  *Completeness*
+
+```{r make-model-options}
+#| message: false
+#| warning: false
+#| eval: true
+#| echo: false
+library(parsnip)
+library(tidyverse)
+
+x <- lapply(parsnip:::extensions(), require, character.only = TRUE)
+
+model_options <-
+  parsnip::get_model_env() %>%
+  as.list() %>%
+  enframe() %>%
+  filter(grepl("pkgs", name)) %>%
+  mutate(name = gsub("_pkgs", "", name)) %>%
+  unnest(value) %>%
+  distinct(name, engine)
+```
+
+Built-in support for `r nrow(model_options)` machine learning models!
+
+```{r print-model-options}
+#| echo: false
+#| collapse: false
+model_options
+```
+
+------------------------------------------------------------------------
+
+### Why tidymodels?  *Completeness*
+
+```{r make-recipes-options}
+#| message: false
+#| warning: false
+#| eval: true
+#| echo: false
+library(tidyverse)
+
+recipes_pkgs <- c("recipes", "textrecipes", "themis")
+
+read_ns <- function(pkg) {
+  asNamespace("recipes") %>%
+    pluck(".__NAMESPACE__.", "exports") %>%
+    as.list() %>%
+    enframe()
+}
+
+step_options <-
+  map(recipes_pkgs, read_ns) %>%
+  bind_rows() %>%
+  filter(grepl("step", name)) %>%
+  distinct(name)
+```
+
+Built-in support for `r nrow(step_options)` data pre-processing techniques!
+
+```{r print-recipes-options}
+#| echo: false
+#| collapse: false
+step_options
+```
+
+## Why tidymodels?  *Extensibility*
+
+. . .
+
+Can't find the technique you need?
+
+. . .
+
+![](https://media.tenor.com/Yw6STFBZk_8AAAAC/not-a-problem-thumbs-up.gif){fig-align="center" width="60%"}
+
+## Why tidymodels?  *Extensibility*
+
+## Why tidymodels? *Deployability*
+
+. . .
+
+Tightly integrated with Posit Workbench and Connect
+
+. . .
+
+-   Workbench: scalable, on-demand computational resources
+-   Connect: share work with collaborators and practitioners
+
+. . .
+
+The vetiver package makes it extremely easy to publish your model. 
+
+
+# Applied example `r emo::ji("pizza")``r emo::ji("pizza")`{background-color="#CA225E"}
+
+## Food deliveries
+
+These data are in the modeldata package. 
+
+```{r}
+#| label: show-data
+
+glimpse(deliveries)
+```
+
+## Investigate the data!
+
+Let's take 10m and have you explore the data. 
+
+Let me know what you think about them. (not a trick question)
+
+`r countdown(minutes = 10, left = 1)`
+
+## Splitting the data
+
+We typically start by splitting the data into partitions used for modeling and assessment: 
+
+```{r}
+#| label: regular-split
+set.seed(991)
+delivery_split <- initial_split(deliveries, prop = 0.75, strata = time_to_delivery)
+
+
+delivery_train <- training(delivery_split)
+delivery_test  <- testing(delivery_split)
+```
+
+<br> 
+
+<br> 
+
+([TMwR](https://www.tmwr.org/splitting){target="_blank"}) ([aml4td](https://aml4td.org/chapters/initial-data-splitting.html){target="_blank"})
+
+
+## Splitting the data (with validation)
+
+Instead, let’s do a 3-way split to include a validation set that we can use _before_ the test set:
+
+```{r}
+#| label: validation-split
+#| code-line-numbers: "2,3,7|"
+set.seed(991)
+delivery_split <- initial_validation_split(deliveries, prop = c(0.8, 0.1), 
+                                           strata = time_to_delivery)
+
+delivery_train <- training(delivery_split)
+delivery_test  <- testing(delivery_split)
+delivery_val   <- validation(delivery_split)
+```
+
+<br> 
+
+<br> 
+
+([TMwR](https://www.tmwr.org/resampling#validation){target="_blank"})
+
+
+## A linear model
+
+
+```{r}
+#| code-line-numbers: "2|"
+mod_spec <- linear_reg()
+mod_fit <- mod_spec %>% fit(time_to_delivery ~ ., data = delivery_train)
+
+tidy(mod_fit)
+```
+
+
+## A linear model
+
+```{r}
+#| code-line-numbers: "2|11|"
+# Good: 
+predict(mod_fit, head(delivery_val, 3))
+
+# Better:
+augment(mod_fit, head(delivery_val, 3)) %>% select(1:9)
+```
+
+## Does it work?
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| label: lm-cal-plot-code
+#| eval: false
+augment(mod_fit, delivery_val) %>% 
+  ggplot(aes(.pred, time_to_delivery)) + 
+  geom_abline(col = "green", lty = 2) +
+  geom_point(alpha = 1 / 3) +
+  geom_smooth(se = FALSE) +
+  coord_obs_pred()
+```
+
+Meh.
+
+How will we quantify "meh"?
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| label: lm-cal-plot
+#| echo: false
+#| fig-width: 4
+#| fig-height: 4
+#| fig-align: right
+#| out-width: 100%
+augment(mod_fit, delivery_val) %>% 
+  ggplot(aes(.pred, time_to_delivery)) + 
+  geom_abline(col = "green", lty = 2) +
+  geom_point(alpha = 1 / 3) +
+  geom_smooth(se = FALSE) +
+  coord_obs_pred()
+```
+
+
+:::
+
+::::
+
+
+## Measuring performance
+
+There are [many metrics](https://yardstick.tidymodels.org/reference/index.html#regression-metrics) that we can use. Let's go with RMSE and R<sup>2</sup>:
+
+```{r}
+#| label: lm-stats
+reg_metrics <- metric_set(rmse, rsq)
+
+augment(mod_fit, delivery_val) %>% 
+  reg_metrics(time_to_delivery, .pred)
+```
+
+<br> 
+
+([TMwR](https://www.tmwr.org/performance){target="_blank"})
+
+## Feature engineering
+
+There's a lot more we can do with this model. 
+
+We need better representations of our _predictors_. 
+
+<br>
+
+We need recipes! `r emo::ji("cupcake")`
+
+Recipes are sequential operations for feature engineering.
+
+<br>
+
+([TMwR](https://www.tmwr.org/recipes){target="_blank"})
+
+## Initializing the recipe
+
+```{r}
+#| label: rec-1
+
+food_rec <- recipe(time_to_delivery ~ ., data = delivery_train)
+food_rec
+```
+This first call just catalogs the data. 
+
+```{r}
+summary(food_rec)
+```
+
+
+## Converting to indicator variables
+
+```{r}
+#| label: rec-dummy
+#| code-line-numbers: "2|"
+food_rec <- recipe(time_to_delivery ~ ., data = delivery_train) %>% 
+  step_dummy(all_factor_predictors())
+```
+
+<br>
+
+For any factor predictors, make binary indicators. 
+
+There are _a lot_ of recipe steps that can convert categorical predictors to numeric columns ([TMwR](https://www.tmwr.org/categorical){target="_blank"}).
+
+The new columns for `day` will have default names of `day_Tue` - `day_Sun`.
+
+<br>
+
+There are many types of recipe selectors. 
+
+## Splines are the best
+
+Splines are tools that enable linear models to model nonlinear data. 
+
+We choose the type of spline function and how many features to use. 
+
+ - More features, more flexibility
+ - More features, more risk of overfitting
+ 
+We'll focus on _natural splines_. 
+
+<br> <br>
+
+([TMwR](https://www.tmwr.org/recipes#spline-functions){target="_blank"})
+
+##
+
+```{shinylive-r}
+#| label: fig-natural-spline
+#| viewerHeight: 600
+#| viewerWidth: "100%"
+#| standalone: true
+
+
+library(shiny)
+library(patchwork)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(splines2)
+library(bslib)
+library(viridis)
+library(modeldata)
+
+data(ames)
+ames$Sale_Price <- log10(ames$Sale_Price)
+
+ui <- page_fillable(
+  theme = bs_theme(bg = "#fcfefe", fg = "#595959"),
+  padding = "1rem",
+  layout_columns(
+    fill = FALSE,
+    col_widths = breakpoints(sm = c(-3, 6, -3)),
+    sliderInput(
+      "spline_df",
+      label = "# Spline Terms",
+      min = 3L, max = 30L, step = 2L, value = 3L
+    ), # sliderInput
+  ), # layout_columns
+  layout_columns(
+    fill = FALSE,
+    col_widths = breakpoints(sm = c(-1, 10, -1)),
+    as_fill_carrier(plotOutput('spline'))
+  )         
+)
+
+server <- function(input, output, session) {
+  
+  light_bg <- "#fcfefe" # from aml4td.scss
+  grid_theme <- bs_theme(
+    bg = "#fcfefe", fg = "#595959"
+  )
+  
+  # ------------------------------------------------------------------------------
+  
+  theme_light_bl<- function(...) {
+    
+    ret <- ggplot2::theme_bw(...)
+    
+    col_rect <- ggplot2::element_rect(fill = light_bg, colour = light_bg)
+    ret$panel.background  <- col_rect
+    ret$plot.background   <- col_rect
+    ret$legend.background <- col_rect
+    ret$legend.key        <- col_rect
+    
+    larger_x_text <- ggplot2::element_text(size = rel(1.25))
+    larger_y_text <- ggplot2::element_text(size = rel(1.25), angle = 90)
+    ret$axis.text.x <- larger_x_text
+    ret$axis.text.y <- larger_y_text
+    ret$axis.title.x <- larger_x_text
+    ret$axis.title.y <- larger_y_text  
+    
+    ret$legend.position <- "top"
+    
+    ret
+  }
+  
+  col_rect <- ggplot2::element_rect(fill = light_bg, colour = light_bg)
+  
+  maybe_lm <- function(x) {
+    try(lm(y ~ poly(x, input$piecewise_deg), data = x), silent = TRUE)
+  }
+  
+  expansion_to_tibble <- function(x, original, prefix = "term ") {
+    cls <- class(x)[1]
+    nms <- recipes::names0(ncol(x), prefix)
+    colnames(x) <- nms
+    x <- as_tibble(x)
+    x$variable <- original
+    res <- tidyr::pivot_longer(x, cols = c(-variable))
+    if (cls != "poly") {
+      res <- res[res$value > .Machine$double.eps,]
+    }
+    res
+  } 
+  
+  mult_poly <- function(dat, degree = 4) {
+    rng <- extendrange(dat$x, f = .025)
+    grid <- seq(rng[1], rng[2], length.out = 1000)
+    grid_df <- tibble(x = grid)
+    feat <- poly(grid_df$x, degree)
+    res <- expansion_to_tibble(feat, grid_df$x)
+    
+    # make some random names so that we can plot the features with distinct colors
+    rand_names <- lapply(1:degree, function(x) paste0(sample(letters)[1:10], collapse = ""))
+    rand_names<- unlist(rand_names)
+    rand_names <- tibble(name = unique(res$name), name2 = rand_names)
+    res <- 
+      dplyr::inner_join(res, rand_names, by = dplyr::join_by(name)) %>% 
+      dplyr::select(-name) %>% 
+      dplyr::rename(name = name2)
+    res
+  }
+  
+  # ------------------------------------------------------------------------------
+  
+  spline_example <- tibble(y = ames$Sale_Price, x = ames$Latitude)
+  rng <- extendrange(ames$Latitude, f = .025)
+  grid <- seq(rng[1], rng[2], length.out = 1000)
+  grid_df <- tibble(x = grid)
+  alphas <- 1 / 4
+  line_wd <- 1.0
+  
+  base_p <-
+    spline_example %>%
+    ggplot(aes(x = x, y = y)) +
+    geom_point(alpha = 3 / 4, pch = 1, cex = 3) +
+    labs(x = "Predictor", y = "Outcome") +
+    theme_light_bl()
+  
+  output$spline <- renderPlot({
+    
+    spline_fit <- lm(y ~ naturalSpline(x, df = input$spline_df), data = spline_example)
+    spline_pred <- 
+      predict(spline_fit, grid_df, interval = "confidence", level = .90) %>% 
+      bind_cols(grid_df)
+    
+    spline_p <- base_p +
+      geom_ribbon(
+        data = spline_pred,
+        aes(y = NULL, ymin = lwr, ymax = upr),
+        alpha = 1 / 15) +
+      geom_line(
+        data = spline_pred,
+        aes(y = fit),
+        col = "red",
+        linewidth = line_wd)
+    
+    feature_p <-
+      naturalSpline(grid_df$x, df = input$spline_df) %>% 
+      expansion_to_tibble(grid_df$x) %>% 
+      ggplot(aes(variable, y = value, group = name, col = name)) +
+      geom_line(show.legend = FALSE) + # , linewidth = 1, alpha = 1 / 2
+      theme_void() +
+      theme(
+        plot.margin = margin(t = 0, r = 0, b = -20, l = 0),
+        panel.background = col_rect,
+        plot.background = col_rect,
+        legend.background = col_rect,
+        legend.key = col_rect
+      ) +
+      scale_color_viridis(discrete = TRUE, option = "turbo")
+    
+    p <- (feature_p / spline_p) + plot_layout(heights = c(1, 4))
+    
+    print(p)
+    
+  })
+  
+}
+
+app <- shinyApp(ui = ui, server = server)
+```
+
+## Adding splines!
+
+```{r}
+#| label: rec-splines
+#| code-line-numbers: "3|"
+food_rec <- recipe(time_to_delivery ~ ., data = delivery_train) %>% 
+  step_dummy(all_factor_predictors()) %>% 
+  step_spline_natural(hour, distance, deg_free = 5)
+```
+
+<br>
+
+We'll choose five terms for the two predictors (but we could optimize these). 
+
+The new column naming convention is: `hour_1` - `hour_5`.
+
+
+## Adding interactions
+
+```{r}
+#| label: rec-interactions
+#| code-line-numbers: "4|"
+food_rec <- recipe(time_to_delivery ~ ., data = delivery_train) %>% 
+  step_dummy(all_factor_predictors()) %>% 
+  step_spline_natural(hour, distance, deg_free = 5) %>% 
+  step_interact(~ starts_with("hour_"):starts_with("day_"))
+```
+
+<br>
+
+These new columns are named (by default) to be `hour_1_x_day_Tue` through `hour_5_x_day_Sun`.
+
+<br>
+
+**Question**: In a new step, how would you select the interactions?
+
+<br>
+
+[List of known recipe steps](https://www.tidymodels.org/find/recipes/){target="_blank"}.
+
+## Combining a model and a recipe
+
+We can make a new type of object called a ~~pipeline~~ workflow that can be used as one unit. 
+
+```{r}
+#| label: lm-wflow
+
+lm_wflow <- 
+  workflow() %>% 
+  add_model(linear_reg()) %>% 
+  add_recipe(food_rec)
+```
+
+<br>
+
+<br>
+
+<br>
+
+([TMwR](https://www.tmwr.org/workflows){target="_blank"})
+
+
+## Combining a model and a recipe
+
+```{r}
+#| label: lm-wflow-print
+lm_wflow
+```
+
+
+## Combining a model and a recipe
+
+```{r}
+#| label: lm-wflow-fit
+lm_fit <- fit(lm_wflow, data = delivery_train)
+
+tidy(lm_fit) %>% arrange(term)
+```
+
+
+## A better path to metrics
+
+```{r}
+#| label: fit-resamples
+#| code-line-numbers: "1|8-10|"
+val_rs <- validation_set(delivery_split)
+val_rs
+
+lm_res <- 
+  lm_wflow %>% 
+  fit_resamples(val_rs, control = control_resamples(save_pred = TRUE))
+
+lm_res
+```
+
+([TMwR](https://www.tmwr.org/resampling){target="_blank"})
+
+## Performance
+
+```{r}
+#| label: lm-metrics
+
+collect_metrics(lm_res)
+```
+
+
+## Does it work better?
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| label: rec-cal-plot-code
+#| eval: false
+#| code-line-numbers: "1-2|"
+lm_res %>% 
+  collect_predictions() %>% 
+  ggplot(aes(.pred, time_to_delivery)) + 
+  geom_abline(col = "green", lty = 2) +
+  geom_point(alpha = 1 / 3) +
+  geom_smooth(se = FALSE) +
+  coord_obs_pred()
+```
+
+Not perfect but `r emo::ji("+1")`.
+
+<br>
+
+The probably package has better tools to visualize and mitigate calibration issues. 
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| label: rec-cal-plot
+#| echo: false
+#| fig-width: 4
+#| fig-height: 4
+#| fig-align: right
+#| out-width: 100%
+lm_res %>% 
+  collect_predictions() %>% 
+  ggplot(aes(.pred, time_to_delivery)) + 
+  geom_abline(col = "green", lty = 2) +
+  geom_point(alpha = 1 / 3) +
+  geom_smooth(se = FALSE) +
+  coord_obs_pred()
+```
+
+
+:::
+
+::::
+
+## Next Steps
+
+We would 
+
+ - do some exploratory data analyses to figure out better features. 
+
+ - _tune_ the model (e.g., optimize the number of spline terms) ([TMwR](https://www.tmwr.org/tuning){target="_blank"})
+ 
+ - try a different estimation method (Bayesian, robust, etc.)
+
+However...
+
+# Let's try a different model `r emo::ji("straight_ruler")``r emo::ji("straight_ruler")``r emo::ji("straight_ruler")``r emo::ji("straight_ruler")`
+
+## Rule-based ensembles
+
+[Cubist](https://scholar.google.com/scholar?hl=en&as_sdt=0,7&q=quinlan+learning+with+continuous+classes){target="_blank"} is a rule-based ensemble. 
+
+It first creates a regression tree and converts it into a rule
+
+ - A path to a terminal node
+ 
+For each rule, it creates a corresponding linear model. 
+
+It makes _many_ of these rule sets. 
+
+
+
+## A regression tree
+
+```{r}
+#| label: reg-tree
+#| echo: false
+#| fig-align: "center"
+
+knitr::include_graphics("figures/delivery-tree.svg")
+```
+
+## Two example rules
+
+```
+if
+   hour <= 14.252
+   day in {Fri, Sat}
+then
+   outcome = -23.039 + 2.85 hour + 1.25 distance + 0.4 item_24
+             + 0.4 item_08 + 0.6 item_01 + 0.6 item_10 + 0.5 item_21
+```
+<br>
+```
+if
+   hour > 15.828
+   distance <= 4.35
+   item_10 > 0
+   day = Thu
+then
+   outcome = 11.29956 + 4.24 distance + 14.3 item_01 + 4.3 item_10
+             + 2.1 item_02 + 0.03 hour
+```             
+
+## Fitting a Cubist model
+
+```{r}
+#| label: cubist
+#| code-line-numbers: "1-4|"
+library(rules)
+
+cubist_res <- 
+  cubist_rules() %>% 
+  fit_resamples(
+    time_to_delivery ~ ., 
+    resamples = val_rs, 
+    control = control_resamples(save_pred = TRUE))
+
+collect_metrics(cubist_res)
+```
+
+## Does it work better?
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| label: cubist-cal-plot-code
+#| eval: false
+cubist_res %>% 
+  collect_predictions() %>% 
+  ggplot(aes(.pred, time_to_delivery)) + 
+  geom_abline(col = "green", lty = 2) +
+  geom_point(alpha = 1 / 3) +
+  geom_smooth(se = FALSE) +
+  coord_obs_pred()
+```
+
+_Nice_
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| label: cubist-cal-plot
+#| echo: false
+#| fig-width: 4
+#| fig-height: 4
+#| fig-align: right
+#| out-width: 100%
+cubist_res %>% 
+  collect_predictions() %>% 
+  ggplot(aes(.pred, time_to_delivery)) + 
+  geom_abline(col = "green", lty = 2) +
+  geom_point(alpha = 1 / 3) +
+  geom_smooth(se = FALSE) +
+  coord_obs_pred()
+```
+
+
+:::
+
+::::
+
+# Moving to the test set
+
+## A shortcut
+
+```{r}
+#| label: last-fit
+
+cubist_wflow <- workflow(time_to_delivery ~ ., cubist_rules())
+
+cubist_final_res <- cubist_wflow %>% last_fit(delivery_split)
+
+cubist_final_res
+```
+
+## Test set results
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| label: cubist-test-stats
+collect_metrics(cubist_final_res)
+```
+
+Not too bad. 
+
+```{r}
+#| label: cubist-test-cal-plot-code
+#| eval: false
+#| code-line-numbers: "1|"
+cubist_final_res %>% 
+  collect_predictions() %>% 
+  ggplot(aes(.pred, time_to_delivery)) + 
+  geom_abline(col = "green", lty = 2) +
+  geom_point(alpha = 1 / 3) +
+  geom_smooth(se = FALSE) +
+  coord_obs_pred()
+```
+
+Hmm. Could be better. 
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| label: cubist-test-cal-plot
+#| echo: false
+#| fig-width: 4
+#| fig-height: 4
+#| fig-align: right
+#| out-width: 100%
+cubist_final_res %>% 
+  collect_predictions() %>% 
+  ggplot(aes(.pred, time_to_delivery)) + 
+  geom_abline(col = "green", lty = 2) +
+  geom_point(alpha = 1 / 3) +
+  geom_smooth(se = FALSE) +
+  coord_obs_pred()
+```
+
+
+:::
+
+::::
+
+# Resources {background-color="#CA225E"}
+
+## Resources
+
+::: columns
+::: {.column width="50%"}
+-   tidyverse: [r4ds.hadley.nz]{style="color:#CA225E;"}
+:::
+
+::: {.column width="50%"}
+![](https://r4ds.hadley.nz/cover.jpg){height="550"}
+:::
+:::
+
+## Resources
+
+::: columns
+::: {.column width="50%"}
+-   tidyverse: [r4ds.hadley.nz]{style="color:#CA225E;"}
+-   tidymodels: [tmwr.org]{style="color:#CA225E;"}
+:::
+
+::: {.column width="50%"}
+![](https://www.tmwr.org/images/cover.png){height="550"}
+:::
+:::
+
+## Resources
+
+-   tidyverse: [r4ds.hadley.nz]{style="color:#CA225E;"}
+-   tidymodels: [tmwr.org]{style="color:#CA225E;"}
+-   webpage: [tidymodels.org]{style="color:#CA225E;"}
+-   homepage: [workshops.tidymodels.org]{style="color:#CA225E;"}
+-   aml4td: [tidymodels.aml4td.org]{style="color:#CA225E;"}
+
+. . .
+
+## Thanks
+
+Thanks for the invitation to speak today!
+
+<br> 
+
+The tidymodels team: **Hannah Frick, Emil Hvitfeldt, and Simon Couch**.
+
+<br> 
+
+Special thanks to the other folks who contributed so much to tidymodels: Davis Vaughan, Julia Silge, Edgar Ruiz, Alison Hill, Desirée De Leon, our previous interns, and the tidyverse team.
