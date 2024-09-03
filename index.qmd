@@ -68,7 +68,7 @@ knitr:
 ## `r emo::ji("wave")` Who are you?
 
 
-Ypu have a good working knowledge of R, and be familiar with basic data wrangling and visualisation as described in [R for Data Science by Wickham and Grolemund (2016)](https://r4ds.hadley.nz/).
+You have a good working knowledge of R, and be familiar with basic data wrangling and visualisation as described in [R for Data Science by Wickham and Grolemund (2016)](https://r4ds.hadley.nz/).
 
 # {background-color="#CA225E"}
 
